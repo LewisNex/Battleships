@@ -10,6 +10,8 @@ const app = express();
 
 const port = process.env.PORT ?? 8080;
 const staticPath = path.join(__dirname, '../../build/Client');
+console.log(`Running on: http://localhost:${port}/`);
+
 
 app.use(express.static(staticPath));
 
