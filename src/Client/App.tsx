@@ -1,3 +1,4 @@
 import React from 'react'
+import Board from './Components/Board';
 
-export default () => <div>Hello world</div>;
+export default () => <Board />;
