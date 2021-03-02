@@ -1,7 +1,7 @@
-import { FixedLengthArray } from './../../../Shared/Models/ships';
+import { GameState } from './../../../Shared/Models/types';
+import { FixedLengthArray, Ship, ShipType } from './../../../Shared/Models/ships';
 import { Coordinate } from './../../../Shared/Models/coordinates';
-import { Ship, ShipType } from "../../../Shared/Models/ships"
-import { isShipValid } from "../../../Shared/Validation/shipValidation"
+import { isShipValid } from "../../../Shared/Validation/shipValidation";
 
 describe('Shared/Validation/shipValidation', () => {
 	test('isShipValid return false for Destroyer coords ontop of eachother', () => 
@@ -49,22 +49,32 @@ describe('Shared/Validation/shipValidation', () => {
 			 {row: 10, column:'G'}]).toBe(false);
 	});
 
+	test('isShipValid return false for two ships ontop of each other horizontally', () => {
+		expectIsCarrierValid(
+			[{row: 10, column:'E'},
+			 {row: 10, column:'F'},
+			 {row: 10, column:'G'},
+			 {row: 10, column:'H'},
+			 {row: 10, column:'I'}],
+			[{Coordinates: [{row: 10, column:'E'}, {row: 10, column:'F'}],
+			  ReloadRate: 1,
+			  Type: ShipType.Destroyer}]
+		).toBe(false);
+	});
+
 });
+
+
 
 // Helpers:
 const expectIsDestroyerValid = (coords: FixedLengthArray<Coordinate, 2>) => {
-	let ship: Ship = {
-		Coordinates: coords,
-		ReloadRate: 1,
-		Type: ShipType.Destroyer
-	}
-	return expect(isShipValid(ship));
+	let ship: Ship = { Coordinates: coords,	ReloadRate: 1, Type: ShipType.Destroyer	}
+	let emptyState: GameState = { Ships:[], PlayerShots:[], EnemyShots:[] }
+	return expect(isShipValid(ship, emptyState));
 }
-const expectIsCarrierValid = (coords: FixedLengthArray<Coordinate, 5>) => {
-	let ship: Ship = {
-		Coordinates: coords,
-		ReloadRate: 1,
-		Type: ShipType.Carrier
-	}
-	return expect(isShipValid(ship));
+const expectIsCarrierValid = (coords: FixedLengthArray<Coordinate, 5>, otherShips?: Ship[]) => {
+	let ship: Ship = { Coordinates: coords, ReloadRate: 1, Type: ShipType.Carrier }
+	if (otherShips == null) {otherShips = []}
+	let emptyState: GameState = { Ships: otherShips, PlayerShots: [], EnemyShots: [] }
+	return expect(isShipValid(ship, emptyState));
 }
