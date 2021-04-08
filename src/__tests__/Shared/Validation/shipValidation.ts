@@ -16,6 +16,7 @@ describe('Shared/Validation/shipValidation', () => {
 		expectIsDestroyerValid(
 			[{row: 1, column:'A'},
 			 {row: 3, column:'A'}]).toBe(false));
+
 	test('isShipValid return false for Destroyer coords too far apart horizontally and vertically', () =>
 		expectIsDestroyerValid(
 			[{row: 1, column:'A'},
@@ -47,74 +48,62 @@ describe('Shared/Validation/shipValidation', () => {
 			 {row: 10, column:'H'},
 			 {row: 10, column:'G'}]).toBe(false);
 	});
-
-	test('isShipValid return false for two ships ontop of each other horizontally', () => {
-		expectIsCarrierValid(
-			[{row: 10, column:'E'},
-			 {row: 10, column:'F'},
-			 {row: 10, column:'G'},
-			 {row: 10, column:'H'},
-			 {row: 10, column:'I'}],
-			[{Coordinates: [{row: 10, column:'E'},
-				   			{row: 10, column:'F'}],
-			  ReloadRate: 1,
-			  Type: ShipType.Destroyer}]
-		).toBe(false);
-	});
-	test('isShipValid return false for two ships ontop of each other vertically', () => {
-		expectIsCarrierValid(
-			[{row: 10, column:'E'},
-			 {row: 9, column:'E'},
-			 {row: 8, column:'E'},
-			 {row: 7, column:'E'},
-			 {row: 6, column:'E'}],
-			[{Coordinates: [{row: 5, column:'E'},
-				   			{row: 6, column:'E'}],
-			  ReloadRate: 1,
-			  Type: ShipType.Destroyer}]
-		).toBe(false);
+	test('isShipValid return false for two ships ontop of each other vertically', () => {		
+		let ship = getDestroyer([
+				{row: 8, column:'E'},
+				{row: 9, column:'E'}]);
+		let otherShip = getDestroyer([
+				{row: 9, column:'E'},
+				{row: 10, column:'E'}]);
+		let state: GameState = { 
+			Ships: [otherShip],
+			PlayerShots: [],
+			EnemyShots: []
+		};
+		expect(isShipValid(ship, state)).toBe(false);
 	});
 	test('isShipValid return false for two ships crossed ontop of each other', () => {
-		expectIsCarrierValid(
-			[{row: 10, column:'E'},
-			 {row: 9, column:'E'},
-			 {row: 8, column:'E'},
-			 {row: 7, column:'E'},
-			 {row: 6, column:'E'}],
-			[{Coordinates: [{row: 8, column:'D'},
-				   			{row: 8, column:'E'},
-							{row: 8, column:'F'}],
-			  ReloadRate: 1,
-			  Type: ShipType.Submarine}]
-		).toBe(false);
-	});test('isShipValid return true for two ships placed in corners of board not overlapping', () => {
-		expectIsCarrierValid(
-			[{row: 1, column:'A'},
-			 {row: 2, column:'A'},
-			 {row: 3, column:'A'},
-			 {row: 4, column:'A'},
-			 {row: 5, column:'A'}],
-			[{Coordinates: [{row: 10, column:'H'},
-				   			{row: 10, column:'I'},
-							{row: 10, column:'J'}],
-			  ReloadRate: 1,
-			  Type: ShipType.Submarine}]
-		).toBe(true);
+		let ship = getDestroyer([
+			{row: 9, column:'E'},
+			{row: 9, column:'F'}]);
+		let otherShip = getDestroyer([
+			{row: 9, column:'E'},
+			{row: 10, column:'E'}]);
+		let state: GameState = { 
+			Ships: [otherShip],
+			PlayerShots: [],
+			EnemyShots: []
+		};
+		expect(isShipValid(ship, state)).toBe(false);
 	});
-
+	test('isShipValid return true for two ships placed in corners of board not overlapping', () => {
+		let ship = getDestroyer([
+			{row: 1, column:'E'},
+			{row: 2, column:'E'}]);
+		let otherShip = getDestroyer([
+			{row: 9, column:'E'},
+			{row: 10, column:'E'}]);
+		let state: GameState = { 
+			Ships: [otherShip],
+			PlayerShots: [],
+			EnemyShots: []
+		};
+		expect(isShipValid(ship, state)).toBe(true);
+	});
 });
-
-
 
 // Helpers:
 const expectIsDestroyerValid = (coords: FixedLengthArray<Coordinate, 2>) => {
-	let ship: Ship = { Coordinates: coords,	ReloadRate: 1, Type: ShipType.Destroyer	}
+	let ship: Ship = getDestroyer(coords);
 	let emptyState: GameState = { Ships:[], PlayerShots:[], EnemyShots:[] }
 	return expect(isShipValid(ship, emptyState));
 }
-const expectIsCarrierValid = (coords: FixedLengthArray<Coordinate, 5>, otherShips?: Ship[]) => {
-	let ship: Ship = { Coordinates: coords, ReloadRate: 1, Type: ShipType.Carrier }
-	if (otherShips == null) {otherShips = []}
-	let emptyState: GameState = { Ships: otherShips, PlayerShots: [], EnemyShots: [] }
+const expectIsCarrierValid = (coords: FixedLengthArray<Coordinate, 5>) => {
+	let ship: Ship = { Coordinates: coords, ReloadRate: 1, Type: ShipType.Carrier };
+	let emptyState: GameState = { Ships: [], PlayerShots: [], EnemyShots: [] }
 	return expect(isShipValid(ship, emptyState));
+}
+
+const getDestroyer = (coords: FixedLengthArray<Coordinate, 2>) : Ship => {
+	return { Coordinates: coords,	ReloadRate: 1, Type: ShipType.Destroyer	};
 }
