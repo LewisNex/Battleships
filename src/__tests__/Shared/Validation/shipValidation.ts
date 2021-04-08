@@ -39,7 +39,6 @@ describe('Shared/Validation/shipValidation', () => {
 			[{row: 9, column:'I'},
 			 {row: 10, column:'I'}]).toBe(true);
 	});
-
 	test('isShipValid return false for chained adjacent horizontal Carrier coords over 2 coordinates', () => {
 		expectIsCarrierValid(
 			[{row: 10, column:'E'},
@@ -61,6 +60,46 @@ describe('Shared/Validation/shipValidation', () => {
 			  ReloadRate: 1,
 			  Type: ShipType.Destroyer}]
 		).toBe(false);
+	});
+	test('isShipValid return false for two ships ontop of each other vertically', () => {
+		expectIsCarrierValid(
+			[{row: 10, column:'E'},
+			 {row: 9, column:'E'},
+			 {row: 8, column:'E'},
+			 {row: 7, column:'E'},
+			 {row: 6, column:'E'}],
+			[{Coordinates: [{row: 5, column:'E'},
+				   			{row: 6, column:'E'}],
+			  ReloadRate: 1,
+			  Type: ShipType.Destroyer}]
+		).toBe(false);
+	});
+	test('isShipValid return false for two ships crossed ontop of each other', () => {
+		expectIsCarrierValid(
+			[{row: 10, column:'E'},
+			 {row: 9, column:'E'},
+			 {row: 8, column:'E'},
+			 {row: 7, column:'E'},
+			 {row: 6, column:'E'}],
+			[{Coordinates: [{row: 8, column:'D'},
+				   			{row: 8, column:'E'},
+							{row: 8, column:'F'}],
+			  ReloadRate: 1,
+			  Type: ShipType.Submarine}]
+		).toBe(false);
+	});test('isShipValid return true for two ships placed in corners of board not overlapping', () => {
+		expectIsCarrierValid(
+			[{row: 1, column:'A'},
+			 {row: 2, column:'A'},
+			 {row: 3, column:'A'},
+			 {row: 4, column:'A'},
+			 {row: 5, column:'A'}],
+			[{Coordinates: [{row: 10, column:'H'},
+				   			{row: 10, column:'I'},
+							{row: 10, column:'J'}],
+			  ReloadRate: 1,
+			  Type: ShipType.Submarine}]
+		).toBe(true);
 	});
 
 });
