@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ES2017",
+		"target": "ES2019",
 		"outDir": "./dist/",
 		"strictNullChecks": true,
 		"moduleResolution": "node",
@@ -10,6 +10,7 @@
 		"jsx": "react",
 		"lib": [
 			"ES2015",
+			"ES2019",
 			"DOM.Iterable",
 			"ES2016.Array.Include",
 			"ES2017.Object",

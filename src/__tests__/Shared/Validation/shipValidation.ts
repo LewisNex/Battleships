@@ -56,7 +56,8 @@ describe('Shared/Validation/shipValidation', () => {
 			 {row: 10, column:'G'},
 			 {row: 10, column:'H'},
 			 {row: 10, column:'I'}],
-			[{Coordinates: [{row: 10, column:'E'}, {row: 10, column:'F'}],
+			[{Coordinates: [{row: 10, column:'E'},
+				   			{row: 10, column:'F'}],
 			  ReloadRate: 1,
 			  Type: ShipType.Destroyer}]
 		).toBe(false);

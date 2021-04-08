@@ -8,9 +8,15 @@ export const isShipValid = (ship: Ship, gameState: GameState): boolean =>
 	&& areCoordinatesUnique(...ship.Coordinates)
 	&& !isShipOverlapping(ship, ...gameState.Ships);
 
+const hashCoordinate = (coord: Coordinate): string =>
+	`${coord.column}${coord.row}`;
+
 const areCoordinatesUnique = (...coords: Coordinate[]): boolean =>
-	coords.map((x) => `${x.column}${x.row}`)
-		.every((x, i, a) => a.lastIndexOf(x) === i)
+	[...new Set(coords.map(hashCoordinate))].length === coords.length;
+
+// const areCoordinatesUnique = (...coords: Coordinate[]): boolean =>
+// 	coords.map(hashCoordinate)
+// 	      .every((x, i, a) => a.lastIndexOf(x) === i);
 
 const areCoordinatesHorizontal = (...coords: Coordinate[]): boolean =>
 	coords.every(coord => coords[0].row === coord.row);
@@ -28,12 +34,7 @@ const isCoordinatePairAdjacent = (coord1: Coordinate, coord2: Coordinate): boole
 const isCoordinateChainAdjacent = (...coords: Coordinate[]): boolean =>
 	coords.map((x, i) => [x, coords[i+1]] as const)
 		  .filter(([_, y]) => y !== undefined)
-		  .every(([x, y]) => isCoordinatePairAdjacent(x, y));
+		  .every(([x, y]) => isCoordinatePairAdjacent(x, y)); 
 
-const isShipOverlapping = (ship: Ship, ...shipsOnBoard: Ship[]): boolean =>
-	shipsOnBoard.some(
-		shipOnBoard => shipOnBoard.Coordinates.some(
-			coord => ship.Coordinates.includes(coord)
-		)
-	);
-	
+const isShipOverlapping = (ship: Ship, ...shipsOnBoard: Ship[]): boolean => 
+	!areCoordinatesUnique(...shipsOnBoard.concat(ship).flatMap(x => x.Coordinates));
