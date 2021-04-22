@@ -4,6 +4,14 @@ import { Coordinate } from './../../../Shared/Models/coordinates';
 import { isShipValid } from "../../../Shared/Validation/shipValidation";
 
 describe('Shared/Validation/shipValidation', () => {
+	beforeEach(() => {
+		const mockAreCoordinatesUnique = jest.fn();
+		
+		mockAreCoordinatesUnique.mockImplementation((_first: Coordinate, _second: Coordinate) => true);
+		jest.mock('./../../../Shared/gameLogic/coordinateLogic', () => {{
+			areCoordinatesUnique: mockAreCoordinatesUnique;
+		}})
+	})
 	test('isShipValid return false for Destroyer coords ontop of eachother', () => 
 		expectIsDestroyerValid(
 			[{row: 1, column:'A'},
