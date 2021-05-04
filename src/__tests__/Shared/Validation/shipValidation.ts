@@ -5,64 +5,58 @@ import { isShipValid } from "../../../Shared/Validation/shipValidation";
 
 describe('Shared/Validation/shipValidation', () => {
 	beforeEach(() => {
-		const mockAreCoordinatesUnique = jest.fn();
-		
-		mockAreCoordinatesUnique.mockImplementation((_first: Coordinate, _second: Coordinate) => true);
-		jest.mock('./../../../Shared/gameLogic/coordinateLogic', () => {{
-			areCoordinatesUnique: mockAreCoordinatesUnique;
-		}})
 	})
 	test('isShipValid return false for Destroyer coords ontop of eachother', () => 
 		expectIsDestroyerValid(
-			[{row: 1, column:'A'},
-			 {row: 1, column:'A'}]).toBe(false));
+			[new Coordinate(1, 'A'),
+			 new Coordinate(1, 'A')]).toBe(false));
 	test('isShipValid return false for Destroyer coords too far apart vertically', () => 
 		expectIsDestroyerValid(
-			[{row: 1, column:'A'},
-			 {row: 1, column:'D'}]).toBe(false));
+			[new Coordinate(1, 'A'),
+			 new Coordinate(1, 'D')]).toBe(false));
 	test('isShipValid return false for Destroyer coords too far apart horizontally', () =>
 		expectIsDestroyerValid(
-			[{row: 1, column:'A'},
-			 {row: 3, column:'A'}]).toBe(false));
+			[new Coordinate(1, 'A'),
+			 new Coordinate(3, 'A')]).toBe(false));
 
 	test('isShipValid return false for Destroyer coords too far apart horizontally and vertically', () =>
 		expectIsDestroyerValid(
-			[{row: 1, column:'A'},
-			 {row: 3, column:'E'}]).toBe(false));
+			[new Coordinate(1, 'A'),
+			 new Coordinate(3, 'E')]).toBe(false));
 	test('isShipValid return false for Destroyer coords backslash-diagonal', () =>
 		expectIsDestroyerValid(
-			[{row: 1, column:'A'},
-			 {row: 2, column:'B'}]).toBe(false));
+			[new Coordinate(1, 'A'),
+			 new Coordinate(2, 'B')]).toBe(false));
 	test('isShipValid return false for Destroyer coords forwardslash-diagonal', () => {
 		expectIsDestroyerValid(
-			[{row: 5, column:'C'},
-			 {row: 4, column:'B'}]).toBe(false);
+			[new Coordinate(5, 'C'),
+			 new Coordinate(4, 'B')]).toBe(false);
 	});
 	test('isShipValid return true for valid horizontal Destroyer coords', () => {
 		expectIsDestroyerValid(
-			[{row: 5, column:'G'},
-			 {row: 5, column:'F'}]).toBe(true);
+			[new Coordinate(5, 'G'),
+			 new Coordinate(5, 'F')]).toBe(true);
 	});
 	test('isShipValid return true for valid vertical Destroyer coords', () => {
 		expectIsDestroyerValid(
-			[{row: 9, column:'I'},
-			 {row: 10, column:'I'}]).toBe(true);
+			[new Coordinate(9, 'I'),
+			 new Coordinate(10, 'I')]).toBe(true);
 	});
 	test('isShipValid return false for chained adjacent horizontal Carrier coords over 2 coordinates', () => {
 		expectIsCarrierValid(
-			[{row: 10, column:'E'},
-			 {row: 10, column:'F'},
-			 {row: 10, column:'G'},
-			 {row: 10, column:'H'},
-			 {row: 10, column:'G'}]).toBe(false);
+			[new Coordinate(10, 'E'),
+			 new Coordinate(10, 'F'),
+			 new Coordinate(10, 'G'),
+			 new Coordinate(10, 'H'),
+			 new Coordinate(10, 'G')]).toBe(false);
 	});
 	test('isShipValid return false for two ships ontop of each other vertically', () => {		
 		let ship = getDestroyer([
-				{row: 8, column:'E'},
-				{row: 9, column:'E'}]);
+				new Coordinate(8, 'E'),
+				new Coordinate(9, 'E')]);
 		let otherShip = getDestroyer([
-				{row: 9, column:'E'},
-				{row: 10, column:'E'}]);
+				new Coordinate(9, 'E'),
+				new Coordinate(10, 'E')]);
 		let state: GameState = { 
 			Ships: [otherShip],
 			PlayerShots: [],
@@ -72,11 +66,11 @@ describe('Shared/Validation/shipValidation', () => {
 	});
 	test('isShipValid return false for two ships crossed ontop of each other', () => {
 		let ship = getDestroyer([
-			{row: 9, column:'E'},
-			{row: 9, column:'F'}]);
+			new Coordinate(9, 'E'),
+			new Coordinate(9, 'F')]);
 		let otherShip = getDestroyer([
-			{row: 9, column:'E'},
-			{row: 10, column:'E'}]);
+			new Coordinate(9, 'E'),
+			new Coordinate(10, 'E')]);
 		let state: GameState = { 
 			Ships: [otherShip],
 			PlayerShots: [],
@@ -86,11 +80,11 @@ describe('Shared/Validation/shipValidation', () => {
 	});
 	test('isShipValid return true for two ships placed in corners of board not overlapping', () => {
 		let ship = getDestroyer([
-			{row: 1, column:'E'},
-			{row: 2, column:'E'}]);
+			new Coordinate(1, 'E'),
+			new Coordinate(2, 'E')]);
 		let otherShip = getDestroyer([
-			{row: 9, column:'E'},
-			{row: 10, column:'E'}]);
+			new Coordinate(9, 'E'),
+			new Coordinate(10, 'E')]);
 		let state: GameState = { 
 			Ships: [otherShip],
 			PlayerShots: [],

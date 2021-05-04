@@ -1,12 +1,11 @@
 import { Ship } from './../Models/ships';
 import { GameState } from './../Models/types';
 import { Coordinate } from '../Models/coordinates';
-import { areCoordinatesUnique } from '../gameLogic/coordinateLogic';
 
 export const isShipValid = (ship: Ship, gameState: GameState): boolean =>
 	areCoordinatesInline(...ship.Coordinates)
 	&& isCoordinateChainAdjacent(...ship.Coordinates)
-	&& areCoordinatesUnique(...ship.Coordinates)
+	&& Coordinate.areUnique(...ship.Coordinates)
 	&& !isShipOverlapping(ship, ...gameState.Ships);
 
 const areCoordinatesHorizontal = (...coords: Coordinate[]): boolean =>
@@ -28,4 +27,4 @@ const isCoordinateChainAdjacent = (...coords: Coordinate[]): boolean =>
 		  .every(([x, y]) => isCoordinatePairAdjacent(x, y)); 
 
 const isShipOverlapping = (ship: Ship, ...shipsOnBoard: Ship[]): boolean => 
-	!areCoordinatesUnique(...shipsOnBoard.concat(ship).flatMap(x => x.Coordinates));
+	!Coordinate.areUnique(...shipsOnBoard.concat(ship).flatMap(x => x.Coordinates));
