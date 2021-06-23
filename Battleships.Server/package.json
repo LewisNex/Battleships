@@ -5,8 +5,7 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "start": "node app",
-    "start-ts": "ts-node-dev app.ts"
+    "start": "node app"
   },
   "description": "Battleships.Server",
   "author": {

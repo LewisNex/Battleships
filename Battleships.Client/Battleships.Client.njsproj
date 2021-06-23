@@ -30,19 +30,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="webpack.config.js" />
-    <Content Include="index.html" />
+    <Content Include="src\index.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App.tsx" />
-    <TypeScriptCompile Include="Components\Board\index.tsx" />
-    <TypeScriptCompile Include="index.tsx" />
+    <TypeScriptCompile Include="src\App.tsx" />
+    <TypeScriptCompile Include="src\Components\Board\index.tsx" />
+    <TypeScriptCompile Include="src\index.tsx" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Components\Board\" />
+    <Folder Include="src\Components\" />
+    <Folder Include="src\Components\Board\" />
+    <Folder Include="src\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

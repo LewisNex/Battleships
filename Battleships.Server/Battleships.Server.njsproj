@@ -34,7 +34,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="app.ts" />
+    <None Include="src\app.ts" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -42,10 +42,11 @@
     <Content Include="Web.Debug.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api\" />
+    <Folder Include="src\Api\" />
+    <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Api\index.ts" />
+    <TypeScriptCompile Include="src\Api\index.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

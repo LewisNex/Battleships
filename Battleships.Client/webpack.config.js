@@ -6,7 +6,7 @@ const {
 } = process.env;
 
 module.exports = {
-  entry: './index.tsx',
+  entry: './src/index.tsx',
   mode: NODE_ENV,
   target: 'node',
   output: {
@@ -16,7 +16,7 @@ module.exports = {
   devtool: 'eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'src/index.html',
     }),
   ],
   resolve: {
