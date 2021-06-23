@@ -1,7 +1,7 @@
-import { GameState } from './../../../Battleships.Core/';
-import { FixedLengthArray, Ship, ShipType } from './../../../Shared/Models/ships';
-import { Coordinate } from './../../../Shared/Models/coordinates';
-import { isShipValid } from "../../../Shared/Validation/shipValidation";
+import { GameState } from './../../../Battleships.Core/src/models/types';
+import { FixedLengthArray, Ship, ShipType } from './../../../Battleships.Core/src/models/ships';
+import { Coordinate } from './../../../Battleships.Core/src/models/coordinates';
+import { isShipValid } from "./../../../Battleships.Core/src/validation / shipValidation";
 
 describe('Shared/Validation/shipValidation', () => {
 	beforeEach(() => {
