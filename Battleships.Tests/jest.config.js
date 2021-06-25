@@ -10,6 +10,5 @@ module.exports = {
     transform: {
         '^.+\\.(ts|tsx)$': 'ts-jest',
     },
-    collectCoverage: true,
-    mapCoverage: true,
+    collectCoverage: true
 };

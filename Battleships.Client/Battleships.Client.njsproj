@@ -39,11 +39,23 @@
     <TypeScriptCompile Include="src\App.tsx" />
     <TypeScriptCompile Include="src\Components\Board\index.tsx" />
     <TypeScriptCompile Include="src\index.tsx" />
+    <TypeScriptCompile Include="src\Logic\gameLogic\shotLogic.ts" />
+    <TypeScriptCompile Include="src\Logic\Models\coordinates.ts" />
+    <TypeScriptCompile Include="src\Logic\Models\fixedLengthArray.ts" />
+    <TypeScriptCompile Include="src\Logic\Models\ships.ts" />
+    <TypeScriptCompile Include="src\Logic\Models\shots.ts" />
+    <TypeScriptCompile Include="src\Logic\Models\types.ts" />
+    <TypeScriptCompile Include="src\Logic\Validation\shipValidation.ts" />
+    <TypeScriptCompile Include="src\Logic\Validation\shotValidation.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Board\" />
     <Folder Include="src\" />
+    <Folder Include="src\Logic\" />
+    <Folder Include="src\Logic\gameLogic\" />
+    <Folder Include="src\Logic\Models\" />
+    <Folder Include="src\Logic\Validation\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

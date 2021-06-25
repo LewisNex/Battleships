@@ -8,8 +8,10 @@ EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Battleships.Client", "Battleships.Client\Battleships.Client.njsproj", "{FF6EED6F-869D-40F1-9DC2-CD9809426A37}"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Battleships.Tests", "Battleships.Tests\Battleships.Tests.njsproj", "{9BBA3217-C1D6-4837-BFBB-16B2F3D48CE0}"
-EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Battleships.Core", "..\..\Battleships\Battleships.Core\gameLogic\Battleships.Core.njsproj", "{3D32171F-1180-4993-9B1B-3B2A781A2C3E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6885A25B-75BC-489F-B9A0-6112641ABEFD} = {6885A25B-75BC-489F-B9A0-6112641ABEFD}
+		{FF6EED6F-869D-40F1-9DC2-CD9809426A37} = {FF6EED6F-869D-40F1-9DC2-CD9809426A37}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,6 @@ Global
 		{9BBA3217-C1D6-4837-BFBB-16B2F3D48CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BBA3217-C1D6-4837-BFBB-16B2F3D48CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BBA3217-C1D6-4837-BFBB-16B2F3D48CE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D32171F-1180-4993-9B1B-3B2A781A2C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D32171F-1180-4993-9B1B-3B2A781A2C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D32171F-1180-4993-9B1B-3B2A781A2C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D32171F-1180-4993-9B1B-3B2A781A2C3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

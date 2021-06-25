@@ -1,11 +1,9 @@
-import { GameState } from './../../../Battleships.Core/src/models/types';
-import { FixedLengthArray, Ship, ShipType } from './../../../Battleships.Core/src/models/ships';
-import { Coordinate } from './../../../Battleships.Core/src/models/coordinates';
-import { isShipValid } from "./../../../Battleships.Core/src/validation / shipValidation";
+import { GameState } from '../../../../../Battleships.Client/src/Logic/Models/types';
+import { FixedLengthArray, Ship, ShipType } from '../../../../../Battleships.Client/src/Logic/Models/ships';
+import { Coordinate } from '../../../../../Battleships.Client/src/Logic/Models/coordinates';
+import { isShipValid } from "../../../../../Battleships.Client/src/Logic/Validation/shipValidation";
 
 describe('Shared/Validation/shipValidation', () => {
-	beforeEach(() => {
-	})
 	test('isShipValid return false for Destroyer coords ontop of eachother', () => 
 		expectIsDestroyerValid(
 			[new Coordinate(1, 'A'),
