@@ -7,7 +7,7 @@
     "name": "Lewis Light"
   },
   "scripts": {
-    "build": "webpack --env development",
+    "build": "webpack --env development --no-color",
     "clean": "tsc --build --clean"
   },
   "devDependencies": {
