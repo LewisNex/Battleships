@@ -1,7 +1,7 @@
 import React from "react";
 
 export default () => {
-	return <table className="LewisIsReallyAPeodoForLittleGayBoysLikeJake">		
+	return <table className="board">		
 		{Array.from({length: 8}, (_, k) => <Row key={k}/>)}
 	</table>
 }
