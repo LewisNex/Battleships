@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack --env development --no-color",
+    "build-watch": "webpack --env development --watch",
     "clean": "tsc --build --clean"
   },
   "devDependencies": {
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-draggable": "^4.4.3"
   }
 }
