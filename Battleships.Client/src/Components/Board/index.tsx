@@ -1,5 +1,8 @@
 import React from "react";
+import React, { useRef, useState } from "react";
 import Draggable, { ControlPosition, DraggableEvent } from "react-draggable";
+
+const stepSize = 1;
 
 export default () => {
 	return <table className="board">		
