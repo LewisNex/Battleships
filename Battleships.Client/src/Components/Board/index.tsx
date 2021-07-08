@@ -1,13 +1,17 @@
-import React from "react";
 import React, { useRef, useState } from "react";
 import Draggable, { ControlPosition, DraggableEvent } from "react-draggable";
 
 const stepSize = 1;
 
 export default () => {
-	return <table className="board">		
+	return <> <table style={{
+		borderStyle: "solid",
+		borderColor: "black",
+		borderWidth: "1px",	
+		borderSpacing: 2}} className="board">		
 		{Array.from({length: 8}, (_, k) => <Row key={k}/>)}
 	</table>
+	<Ship/> </>
 }
 
 export const Ship = () => {
@@ -46,4 +50,11 @@ export const Ship = () => {
 	</Draggable>
 }
 
-const Row = () => <tr>{Array.from({length: 8}, (_, k) => <td key={k}/>)}</tr>
+export const Row = () => <tr>{Array.from({length: 8}, (_, k) => 
+<td style={{
+	borderStyle: "solid",
+	borderColor: "black",
+	borderWidth: "1px",
+	height: "50px",
+	backgroundColor: k % 2 == 0 ? "blue" : "blueviolet",
+	width: "50px"}} key={k}/>)}</tr>
