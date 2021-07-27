@@ -28,6 +28,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
 		"importHelpers": true,
-		"sourceMap": true
+		"sourceMap": true,
+		"typeRoots" : ["src/declarations.d.ts"]
 	}
 }

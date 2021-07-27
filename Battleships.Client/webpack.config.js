@@ -16,38 +16,42 @@ module.exports = {
   devtool: 'eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+        template: 'src/index.html',
     }),
   ],
   resolve: {
     extensions: ['.ts', '.js', '.tsx'],
   },
   module: {
-    rules: [
-      {
-        test: /\.jsx?$/i,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            babelrc: true,
-          },
-        }],
-      },
-      {
-        test: /\.tsx?$/i,
-        exclude: /node_modules/,
-        use: [
+      rules: [
           {
-            loader: 'babel-loader',
-            options: {
-              babelrc: true,
-            },
+              test: /\.jsx?$/i,
+              exclude: /node_modules/,
+              use: [{
+                  loader: 'babel-loader',
+                  options: {
+                      babelrc: true,
+                  },
+              }],
           },
           {
-            loader: 'ts-loader',
-          }],
-      },
-    ],
-  },
+              test: /\.tsx?$/i,
+              exclude: /node_modules/,
+              use: [
+                  {
+                      loader: 'babel-loader',
+                      options: {
+                          babelrc: true,
+                      },
+                  },
+                  {
+                      loader: 'ts-loader',
+                  }],
+          },
+          {
+              test: /\.png$/i,
+              type: 'asset/resource'
+          }
+      ],
+    },
 };

@@ -2,6 +2,8 @@ import React, { Ref, RefObject, useRef, useState } from "react";
 import Draggable, { ControlPosition, DraggableData, DraggableEvent } from "react-draggable";
 import { Row as RowType, Coordinate } from "../../Logic/Models/coordinates";
 
+import shipImage from "../../resources/ship.png"
+
 type BoardMapping = { [key: string]: Ref<HTMLTableDataCellElement>}
 
 export default () => {
@@ -50,9 +52,9 @@ export const Ship = () => {
 		onDrag={handleDrag}
 		onStop={handleStop}>
 			<div className="handle">
-			<div>{isDragged ? "TRUE" : "FALSE"}Drag me</div>
-            <img draggable={false} height={isDragged ? 100 : 50} width={isDragged ? 100 : 50} src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ship_diagram-numbers.svg/2000px-Ship_diagram-numbers.svg.png" />
-				<div>This read me ...</div>
+			    <div>{isDragged ? "TRUE" : "FALSE"}Drag me</div>
+                <img draggable={false} height={isDragged ? 100 : 50} width={isDragged ? 100 : 50} src={shipImage} />
+			    <div>This read me ...</div>
 			</div>
 	</Draggable>
 }
