@@ -1,17 +1,27 @@
-import React, { useRef, useState } from "react";
-import Draggable, { ControlPosition, DraggableEvent } from "react-draggable";
+import React, { Ref, RefObject, useRef, useState } from "react";
+import Draggable, { ControlPosition, DraggableData, DraggableEvent } from "react-draggable";
+import { Row as RowType, Coordinate } from "../../Logic/Models/coordinates";
 
-const stepSize = 1;
+type BoardMapping = { [key: string]: Ref<HTMLTableDataCellElement>}
 
 export default () => {
+    const mapping = useRef<BoardMapping>({})
+    mapping.current = {}
+
 	return <> <table style={{
 		borderStyle: "solid",
 		borderColor: "black",
 		borderWidth: "1px",	
-		borderSpacing: 2}} className="board">		
-		{Array.from({length: 8}, (_, k) => <Row key={k}/>)}
-	</table>
-	<Ship/> </>
+		borderSpacing: 2}} className="board">	 	
+        {([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const).map((r: RowType) =>
+            <tr>
+                {([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const).map((c: RowType) => {
+                    let coordinate = new Coordinate(r, c)
+                    return <Cell setRef={ref => mapping.current[coordinate.toString()] = ref} coordinate={coordinate} />
+                })}
+            </tr>)}
+        </table>
+        <Ship/> </>
 }
 
 export const Ship = () => {
@@ -37,7 +47,6 @@ export const Ship = () => {
 		axis="both"
 		handle=".handle"
 		position={pos}
-		grid={[stepSize, stepSize]}
 		scale={1}
 		onStart={handleStart}
 		onDrag={handleDrag}
@@ -50,11 +59,26 @@ export const Ship = () => {
 	</Draggable>
 }
 
-export const Row = () => <tr>{Array.from({length: 8}, (_, k) => 
-<td style={{
-	borderStyle: "solid",
-	borderColor: "black",
-	borderWidth: "1px",
-	height: "50px",
-	backgroundColor: k % 2 == 0 ? "blue" : "blueviolet",
-	width: "50px"}} key={k}/>)}</tr>
+
+type CellProps = {
+	coordinate: Coordinate
+    setRef: (ref: RefObject<HTMLTableDataCellElement>) => {}
+}
+
+const Cell = ({ setRef, coordinate }: CellProps) => {
+
+    let ref = useRef(null)
+    setRef(ref)
+
+    return <td
+        id={coordinate.toString()}
+        ref={ref}
+        style={{
+            borderStyle: "solid",
+            borderColor: "black",
+            borderWidth: "1px",
+            height: "50px",
+            backgroundColor: "cyan",
+            width: "50px"
+        }} />
+}
