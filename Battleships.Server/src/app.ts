@@ -17,9 +17,9 @@ app.use(express.static(staticPath));
 app.use('/api', apiRouter);
 
 app.listen(port, () => {
-    if (process.env.OPEN_BROWSER_ON_LOAD === 'true') {
-        open(`http://localhost:${port}`);
-    }
+	if (process.env.OPEN_BROWSER_ON_LOAD === 'true') {
+		open(`http://localhost:${port}`);
+	}
 });
 
 app.get('/', (_req, res) => 

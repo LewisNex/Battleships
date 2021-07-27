@@ -5,9 +5,9 @@ export class Coordinate {
 	row: Row;
 	column: Column;
 
-    constructor(row: Row, column: Column | Row) {
-        if (typeof (column) === "number") column = mapIntToColumn(column)
-        this.row = row;
+	constructor(row: Row, column: Column | Row) {
+		if (typeof (column) === "number") column = mapIntToColumn(column)
+		this.row = row;
 		this.column = column;
 	}
 
@@ -28,6 +28,6 @@ export class Coordinate {
 }
 
 const mapIntToColumn = (i: Row): Column => {
-    const mapping = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E', 6:'F', 7:'G', 8:'H', 9:'I', 10:'J'} as  const
-    return mapping[i]
+	const mapping = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E', 6:'F', 7:'G', 8:'H', 9:'I', 10:'J'} as const
+	return mapping[i]
 }
