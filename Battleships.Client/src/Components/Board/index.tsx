@@ -1,4 +1,4 @@
-import React, { Ref, RefObject, useRef, useState } from "react";
+import React, { Ref, RefObject, useRef, useState, Dispatch, SetStateAction } from "react";
 import Draggable, { ControlPosition, DraggableData, DraggableEvent } from "react-draggable";
 import { Row as RowType, Coordinate } from "../../Logic/Models/coordinates";
 
@@ -7,8 +7,11 @@ import shipImage from "../../resources/ship.png"
 type BoardMapping = { [key: string]: Ref<HTMLTableDataCellElement>}
 
 export default () => {
-	const mapping = useRef<BoardMapping>({})
-	mapping.current = {}
+    const mapping = useRef<BoardMapping>({})
+    const [shipCoords, setShipCoords] = useState<ControlPosition>({x:0, y:0})
+    const setShipToClosestCell = (ui) => { ToDo }
+
+    }
 
 	return <> <table style={{
 		borderStyle: "solid",
@@ -23,11 +26,15 @@ export default () => {
 				})}
 			</tr>)}
 		</table>
-		<Ship/> </>
+        <Ship pos={shipCoords} setPos={ui => setShipCoords(s => { return { x: s.x + ui.deltaX, y: s.y + ui.deltaY } })}/> </>
 }
 
-export const Ship = () => {
-	const [pos, setPos] = useState<ControlPosition>({x:0, y:0})
+export type ShipProps = {
+    pos: ControlPosition,
+    setPos: Dispatch<SetStateAction<ControlPosition>>
+}
+
+export const Ship = ({pos, setPos}: ShipProps) => {
 	const [isDragged, setIsDragged] = useState<boolean>(false);
 	
 	const handleStart = (o: DraggableEvent) => {
@@ -35,7 +42,7 @@ export const Ship = () => {
 	}
 
 	const handleDrag = (e: DraggableEvent, ui: DraggableData) => {
-		setPos(s => { return { x: s.x + ui.deltaX, y: s.y + ui.deltaY } })
+        setPos(ui);
 		setIsDragged(true);
 
 	}
